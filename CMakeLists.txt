@@ -11,7 +11,7 @@ include ( lua )
 
 find_package ( ZLIB REQUIRED )
 
-set ( SRC src/bit.c src/core.c src/sha.c src/zlib.c )
+set ( SRC src/bit.c src/core.c src/sha.c src/zlib.c src/core.def )
 set ( LIB ${ZLIB_LIBRARIES} )
 
 include_directories ( ${ZLIB_INCLUDE_DIR} )
