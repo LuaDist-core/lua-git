@@ -47,7 +47,8 @@ local function remove_trailing(path)
 end
 
 -- Extract file or directory name from its path.
-local function extract_name(path)
+-- removed local -> we need it to call from protocol ...
+function extract_name(path)
 	if is_root(path) then return path end
 
 	path = remove_trailing(path)
