@@ -8,6 +8,7 @@ local join_path = git.util.join_path
 local parent_dir = git.util.parent_dir
 local make_dir = git.util.make_dir
 local correct_separators = git.util.correct_separators
+local extract_name = git.util.extract_name
 
 local assert, error, getmetatable, io, os, pairs, print, require, string, tonumber =
 	assert, error, getmetatable, io, os, pairs, print, require, string, tonumber
@@ -66,7 +67,15 @@ local function tmpname()
 	if not isPosix then
 		local prefix = os.getenv("TEMP")
 		local name = os.tmpname()
-		return join_path(prefix, name)
+		
+		-- return join_path(prefix, name)
+		
+		--[[
+			vc14.0 system libs with lua's os.tmpname() return absolute name of temporary file, 
+			so this break luadist builds, so just simply extract a relative name. 
+			This should not hurth around, but maybe it need more testing ...
+		]]
+		return join_path(prefix, "\\" .. extract_name(name))
 	else
 		return os.tmpname()
 	end
